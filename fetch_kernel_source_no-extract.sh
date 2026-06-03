@@ -209,6 +209,8 @@ main() {
     trap "rm -rf '$tmpdir'" EXIT
 
     echo -e "${GREEN}[1/5] 下载校验文件...${NC}"
+    echo $sha
+    echo $tmpdir
     download "$sha" "$tmpdir/$sha" || {
         echo -e "${RED}下载校验文件失败，请更换下载源后重试${NC}"; exit 1
     }
@@ -217,6 +219,8 @@ main() {
     echo -e "${GREEN}[2/5] 下载 ${#parts[@]} 个分卷（进度条如下）...${NC}"
     for part in "${parts[@]}"; do
         echo -n "   -> "
+        echo $part
+        echo $tmpdir
         download "$part" "$tmpdir/$part" || {
             echo -e "${RED}下载失败${NC}"; exit 1
         }
