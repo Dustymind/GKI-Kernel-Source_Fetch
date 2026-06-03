@@ -110,7 +110,7 @@ download() {
     local path="$1"
     local dest="$2"
     local url="${MIRROR}${BASE_RAW}/${path}"
-    curl -fSL --retry 3 --retry-delay 5 -# -o "$dest" "$url"
+    aria2c -j 8 "$url" -o "$dest"
 }
 
 # 从 Release 资产列表中获取某个大版本的实际 LTS 子版本号
